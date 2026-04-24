@@ -1,635 +1,343 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Minecraft Hub — Mody & Texture Packi</title>
-<meta name="description" content="Ghost HUB — polecane mody, shadery i texture packi. Optymalizacje, PvP mody, texture packi i kontakt." />
-<link rel="icon" href="/favicon.ico" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metis Client | Dominuj z Najlepszymi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #111111;
+            --card-bg: #1a1a1a;
+            --primary: #8b5cf6; /* Fiolet Metis */
+            --primary-hover: #7c3aed;
+            --text-main: #ffffff;
+            --text-muted: #a3a3a3;
+            --border-color: #333333;
+        }
 
-<!-- Google Font -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-<style>
-  :root{
-    /* blue / matte theme */
-    --bg:#071023;
-    --panel:#0c1626;
-    --muted:#9fb6c9;
-    --accent:#60b8ff;       /* lighter blue */
-    --accent-2:#4a7bff;     /* deeper blue */
-    --card: rgba(8,16,28,0.6);
-    --glass: rgba(255,255,255,0.02);
-    --radius:14px;
-    --glass-border: rgba(255,255,255,0.03);
-    --highlight: rgba(96,184,255,0.12);
-  }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            /* Subtelny wzór tła w stylu heksagonów/siatki */
+            background-image: radial-gradient(circle at center, #1f1f1f 0%, #111111 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
 
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family:'Inter',system-ui,Segoe UI,Arial;
-    /* bluish soft radial lights */
-    background:
-      radial-gradient(1000px 500px at 10% 10%, rgba(74,123,255,0.03), transparent 6%),
-      radial-gradient(700px 350px at 90% 90%, rgba(96,184,255,0.02), transparent 6%),
-      var(--bg);
-    color:#e6eef6;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    padding:28px;
-    display:flex;
-    align-items:flex-start;
-    justify-content:center;
-    gap:20px;
-  }
+        /* --- NAWIGACJA --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(17, 17, 17, 0.9);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-  /* reduce motion if user prefers */
-  @media (prefers-reduced-motion: reduce){
-    *{ transition:none !important; animation:none !important; }
-  }
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-  .container{
-    width:100%;
-    max-width:1100px;
-  }
+        .logo span { color: var(--primary); }
 
-  /* APP BAR */
-  header.appbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.008));
-    padding:18px 20px;
-    border-radius:12px;
-    border:1px solid var(--glass-border);
-    backdrop-filter: blur(6px) saturate(110%);
-    box-shadow: 0 10px 30px rgba(4,10,24,0.6);
-    margin-bottom:18px;
-  }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--primary); }
 
-  .brand{
-    display:flex;
-    align-items:center;
-    gap:16px;
-  }
-  .logo{
-    width:56px;
-    height:56px;
-    border-radius:10px;
-    background: linear-gradient(135deg,var(--accent),var(--accent-2));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:700;
-    color:#02121f;
-    box-shadow: 0 10px 30px rgba(36,60,90,0.35);
-  }
-  .title{ line-height:1; }
-  .title h1{margin:0;font-size:18px;font-weight:700}
-  .title p{margin:0;color:var(--muted);font-size:13px}
+        .nav-buttons { display: flex; gap: 15px; }
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+        .btn-outline:hover { background: rgba(255,255,255,0.1); }
+        .btn-discord {
+            background: #5865F2; /* Discord Color */
+            color: white;
+        }
+        .btn-discord:hover { background: #4752C4; transform: translateY(-2px); }
 
-  /* tabs */
-  .tabs{ display:flex; gap:10px; }
-  .tab-btn{
-    padding:10px 14px;
-    border-radius:12px;
-    border:1px solid transparent;
-    background:transparent;
-    color:var(--muted);
-    cursor:pointer;
-    font-weight:600;
-    transition: all .22s ease;
-  }
-  .tab-btn:focus{ outline: none; box-shadow: 0 0 0 4px rgba(74,123,255,0.08); }
-  .tab-btn.active{
-    color:#02121f;
-    background: linear-gradient(90deg,var(--accent),var(--accent-2));
-    box-shadow: 0 12px 30px rgba(74,123,255,0.06);
-    transform:translateY(-2px);
-  }
+        /* --- HERO SECTION --- */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
+            animation: fadeIn 1s ease-out;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.5;
+        }
+        .btn-primary {
+            background: var(--text-main);
+            color: var(--bg-color);
+            padding: 12px 30px;
+            font-size: 1.1rem;
+        }
+        .btn-primary:hover {
+            background: #e5e5e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+        }
 
-  /* layout */
-  .main{ display:grid; grid-template-columns: 1fr 360px; gap:20px; }
+        /* --- PRICING (CENNIK) --- */
+        .pricing-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .pricing-section h2 { margin-bottom: 40px; font-size: 2rem; }
+        
+        .pricing-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
 
-  /* left panel (matte glass) */
-  .panel{
-    background: linear-gradient(180deg,var(--card), rgba(6,12,22,0.66));
-    border-radius:var(--radius);
-    padding:18px;
-    border:1px solid var(--glass-border);
-    box-shadow: 0 8px 40px rgba(3,8,18,0.6);
-    position:relative;
-    overflow:auto;
-    max-height: calc(100vh - 120px);
-    backdrop-filter: blur(4px) saturate(110%);
-  }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 40px 30px;
+            width: 320px;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
 
-  .grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:14px; }
+        /* Najpopularniejszy pakiet */
+        .card.popular {
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.15);
+            transform: scale(1.05);
+        }
+        .card.popular:hover { transform: scale(1.05) translateY(-10px); }
+        .badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
 
-  .card{
-    background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
-    border-radius:12px;
-    padding:12px;
-    border:1px solid rgba(255,255,255,0.02);
-    transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s ease, opacity .18s ease;
-    display:flex;
-    gap:12px;
-    align-items:flex-start;
-    opacity:1;
-    transform:translateY(0) scale(1);
-    backdrop-filter: blur(2px);
-  }
-  .card:hover{ transform: translateY(-6px) scale(1.01); box-shadow: 0 18px 40px rgba(14,32,60,0.35); }
-  .card.hide{ opacity:0; transform: translateY(8px) scale(0.985); pointer-events:none; height:auto; visibility:hidden; }
+        .card h3 { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 10px; }
+        .price { font-size: 2.5rem; font-weight: 800; margin-bottom: 5px; }
+        .price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+        .card > p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 25px; min-height: 40px; }
 
-  .card .meta{ flex:1; }
-  .card h3{margin:0;font-size:15px}
-  .card p{margin:6px 0 0 0;color:var(--muted);font-size:13px;line-height:1.35}
+        .features { list-style: none; margin-bottom: 30px; }
+        .features li {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .features li::before {
+            content: '✔';
+            color: var(--primary);
+            font-weight: bold;
+        }
 
-  .card .actions{ display:flex; flex-direction:column; gap:8px; align-items:flex-end; }
-  .btn{ padding:8px 12px; border-radius:10px; border: none; cursor:pointer; font-weight:700; font-size:13px; }
-  .btn-ghost{ background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.03); }
-  .btn-primary{
-    background: linear-gradient(90deg,var(--accent),var(--accent-2));
-    color:#02121f;
-    box-shadow: 0 10px 26px rgba(74,123,255,0.06);
-  }
+        .btn-buy {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: transparent;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            padding: 12px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .btn-buy:hover { background: var(--text-main); color: var(--bg-color); }
+        
+        .card.popular .btn-buy { background: var(--text-main); color: var(--bg-color); }
+        .card.popular .btn-buy:hover { background: #e5e5e5; box-shadow: 0 0 15px rgba(255,255,255,0.3); }
 
-  /* highlight "island" (blue) */
-  #highlightBox{
-    position:absolute;
-    pointer-events:none;
-    border-radius:12px;
-    border:1px solid rgba(74,123,255,0.12);
-    box-shadow: 0 20px 50px rgba(54,100,200,0.05), inset 0 1px 0 rgba(255,255,255,0.012);
-    background: linear-gradient(180deg, rgba(74,123,255,0.03), rgba(74,123,255,0.015));
-    transition: all .28s cubic-bezier(.2,.9,.2,1);
-    opacity:0;
-    transform:translateY(6px) scale(0.995);
-    z-index:40;
-  }
-  #highlightBox.show{ opacity:1; transform:translateY(0) scale(1); animation: pulse 2.4s infinite; }
-  @keyframes pulse{
-    0%{ box-shadow: 0 18px 36px rgba(74,123,255,0.03); }
-    50%{ box-shadow: 0 30px 60px rgba(74,123,255,0.06); }
-    100%{ box-shadow: 0 18px 36px rgba(74,123,255,0.03); }
-  }
+        /* --- DISCORD CTA --- */
+        .discord-cta {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            max-width: 800px;
+            margin: 60px auto;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+        .discord-cta h3 { font-size: 1.8rem; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;}
+        .discord-cta p { color: var(--text-muted); margin-bottom: 25px; line-height: 1.6; }
+        .btn-large-discord {
+            display: inline-block;
+            background: #5865F2;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-large-discord:hover { background: #4752C4; box-shadow: 0 0 20px rgba(88, 101, 242, 0.4); transform: scale(1.02); }
 
-  /* media link style */
-  .media-grid{ grid-template-columns: 1fr; }
-  .media-link{
-    display:inline-block;
-    margin-top:8px;
-    padding:10px 12px;
-    border-radius:10px;
-    background: linear-gradient(90deg,var(--accent),var(--accent-2));
-    color:#02121f;
-    text-decoration:none;
-    font-weight:700;
-  }
+        /* --- FOOTER --- */
+        footer {
+            margin-top: auto;
+            padding: 20px 50px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; }
+        .footer-links a:hover { color: var(--text-main); }
 
-  /* small screens */
-  @media (max-width:920px){
-    .main{grid-template-columns:1fr; padding-bottom:40px}
-    .grid{grid-template-columns:1fr}
-    .container{padding:10px}
-    .panel{max-height:none}
-  }
-
-  /* right sidebar */
-  .sidebar{
-    position:sticky;
-    top:28px;
-    align-self:start;
-    background:linear-gradient(180deg, rgba(9,18,30,0.9), rgba(8,14,24,0.9));
-    padding:16px;
-    border-radius:12px;
-    border:1px solid var(--glass-border);
-    box-shadow: 0 12px 30px rgba(2,6,10,0.6);
-  }
-  .search{ display:flex; gap:10px; margin-bottom:12px; }
-  .search input{ flex:1; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,0.03); background:transparent; color:inherit; outline:none; }
-  .pill{ display:inline-block; padding:8px 10px; background:rgba(255,255,255,0.02); border-radius:999px; color:var(--muted); font-size:13px; margin:6px 6px 0 0; border:1px solid rgba(255,255,255,0.02); cursor:pointer; }
-
-  .panel .header-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
-  .muted{color:var(--muted);font-size:13px}
-
-  .icon{ width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,0.01);display:inline-flex;align-items:center;justify-content:center;color:var(--accent);font-weight:800;font-size:18px; }
-
-  footer{ margin-top:18px; text-align:center; color:var(--muted); font-size:13px; }
-
-  .divider{height:1px;background:linear-gradient(90deg,transparent,#0b1522,transparent);margin:12px 0;border-radius:999px}
-</style>
+        /* Animacje */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-  <header class="appbar">
-    <div class="brand">
-      <div class="logo" role="img" aria-label="Minecraft Hub logo">MC</div>
-      <div class="title">
-        <h1>Minecraft Hub</h1>
-        <p>Mody • Texture Packi • Optymalizacje • Shadery • Media</p>
-      </div>
-    </div>
 
-    <nav class="tabs" aria-label="Zakładki">
-      <button class="tab-btn active" data-tab="optymalizacja">Optymalizacja</button>
-      <button class="tab-btn" data-tab="pvp">Mody (PvP)</button>
-      <button class="tab-btn" data-tab="texture">Texture Packi</button>
-      <button class="tab-btn" data-tab="shadery">Shadery</button>
-      <button class="tab-btn" data-tab="media">Media</button>
+    <nav>
+        <div class="logo">
+            <span>M</span> Metis Client
+        </div>
+        <div class="nav-links">
+            <a href="#">Strona Główna</a>
+            <a href="#cennik">Cennik</a>
+            <a href="#">Kontakt</a>
+        </div>
+        <div class="nav-buttons">
+            <button class="btn btn-outline">Zaloguj się</button>
+            <a href="https://discord.gg/4yz2wtXfDP" class="btn btn-discord" target="_blank">Dołącz na Discorda!</a>
+        </div>
     </nav>
-  </header>
 
-  <div class="main">
-    <!-- left -->
-    <section class="panel" id="panel-area" aria-live="polite">
-      <!-- highlight island -->
-      <div id="highlightBox" aria-hidden="true"></div>
+    <header class="hero">
+        <h1>Metis Client: Dominuj z Najlepszymi.</h1>
+        <p>Najbardziej zaawansowany i niewykrywalny cheat na rynku, stworzony dla wymagających.</p>
+        <button class="btn btn-primary" onclick="document.getElementById('cennik').scrollIntoView({behavior: 'smooth'})">Zobacz Cennik</button>
+    </header>
 
-      <!-- Optymalizacje -->
-      <div id="optymalizacja" class="content-block active">
-        <div class="header-row">
-          <div>
-            <strong>Optymalizacje — zestaw polecanych modów</strong>
-            <div class="muted">Zwiększ FPS i zmniejsz spadki, instaluj na Fabric/Quilt (sprawdź zgodność wersji).</div>
-          </div>
-          <div class="muted">Kliknij "Pobierz" aby otworzyć stronę moda</div>
-        </div>
+    <section id="cennik" class="pricing-section">
+        <h2>Cennik Licencji</h2>
+        <div class="pricing-grid">
+            
+            <div class="card">
+                <h3>Licencja 7 dni</h3>
+                <div class="price">10 PLN <span>/ 7 dni</span></div>
+                <p>Przetestuj pełną moc Metis Client. Idealne na start.</p>
+                <ul class="features">
+                    <li>Pełny dostęp do Metis Client</li>
+                    <li>Dostęp do wersji beta</li>
+                    <li>Podstawowe wsparcie</li>
+                </ul>
+                <a href="#" class="btn btn-buy">Kup Teraz</a>
+            </div>
 
-        <div class="grid" id="opti-grid">
-          <!-- existing cards (kept as in original, slightly modernized look) -->
-          <div class="card"><div class="meta"><h3>BadOptimizations</h3><p>Poprawki usuwające fragmenty wolno działającego kodu — szybkie i lekkie usprawnienia.</p></div><div class="actions"><div class="icon">B</div><a class="btn btn-primary" href="https://modrinth.com/mod/badoptimizations/version/2.1.4" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
+            <div class="card popular">
+                <div class="badge">Najpopularniejszy</div>
+                <h3 style="color: #fff;">Licencja 30 dni</h3>
+                <div class="price" style="color: var(--primary);">30 PLN <span style="color: #ccc;">/ 30 dni</span></div>
+                <p>Zyskaj przewagę na miesiąc. Najlepszy stosunek ceny do jakości.</p>
+                <ul class="features">
+                    <li>Pełny dostęp do Metis Client</li>
+                    <li>Priorytetowe wsparcie</li>
+                    <li>Ekskluzywne skrypty</li>
+                    <li>Darmowa pierwsza zmiana HWID</li>
+                </ul>
+                <a href="#" class="btn btn-buy">Kup Teraz</a>
+            </div>
 
-          <div class="card"><div class="meta"><h3>Entity Culling</h3><p>Ukrywa byty, których i tak nie widzisz — duży wpływ na fps przy dużej ilości mobów.</p></div><div class="actions"><div class="icon">E</div><a class="btn btn-primary" href="https://modrinth.com/mod/entityculling/version/1.6.6" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>Cloth Config</h3><p>Biblioteka konfiguracyjna wykorzystywana przez wiele modów (przydatne zależności).</p></div><div class="actions"><div class="icon">CC</div><a class="btn btn-primary" href="https://modrinth.com/mod/cloth-config/version/11.1.118+fabric" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>Fabric Language Kotlin</h3><p>Wtyczka Kotlin dla Fabric — wymagana przez niektóre mody napisane w Kotlinie.</p></div><div class="actions"><div class="icon">K</div><a class="btn btn-primary" href="https://modrinth.com/mod/fabric-language-kotlin/version/1.12.0+kotlin.2.0.10" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>YACL (Yet Another Config Lib)</h3><p>Biblioteka ułatwiająca konfigurację modów w GUI.</p></div><div class="actions"><div class="icon">Y</div><a class="btn btn-primary" href="https://modrinth.com/mod/yacl/version/3.5.0+1.20.1-fabric" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>ModernFix</h3><p>Pakiet optymalizacji poprawiający FPS, ładowanie i zarządzanie pamięcią.</p></div><div class="actions"><div class="icon">M</div><a class="btn btn-primary" href="https://modrinth.com/mod/modernfix/version/5.19.0+mc1.20.1" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>VMP (VeryManyPlayers)</h3><p>Optymalizacje przy wielu graczach — zmniejsza obciążenie serwera/klienta przy dużej populacji.</p></div><div class="actions"><div class="icon">V</div><a class="btn btn-primary" href="https://modrinth.com/mod/vmp-fabric/version/0.2.0+beta.7.102+1.20.1" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>Lithium</h3><p>Poprawia działanie ticków i logiki silnika gry — znaczące usprawnienia serwerowe i singleplayer.</p></div><div class="actions"><div class="icon">L</div><a class="btn btn-primary" href="https://modrinth.com/mod/lithium/version/mc1.20.1-0.11.2" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>Packet Fixer</h3><p>Naprawia problemy z pakietami między wersjami — istotne przy połączeniach serwerowych.</p></div><div class="actions"><div class="icon">P</div><a class="btn btn-primary" href="https://modrinth.com/mod/packet-fixer/version/1.4.2" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>ServerPingerFixer</h3><p>Poprawia pinger serwerów, by nie generować nadmiernych timeoutów.</p></div><div class="actions"><div class="icon">⟲</div><a class="btn btn-primary" href="https://modrinth.com/mod/serverpingerfixer/version/1.0.4" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>MoreCulling</h3><p>Dodatkowe reguły cullingowe, żeby ukryć elementy nieistotne dla widoku gracza.</p></div><div class="actions"><div class="icon">μ</div><a class="btn btn-primary" href="https://modrinth.com/mod/moreculling/version/0.24.0" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>Noisium</h3><p>Audio/źródłowe poprawki optymalizacyjne — poprawia stabilność dźwięku i obciążenie.</p></div><div class="actions"><div class="icon">♫</div><a class="btn btn-primary" href="https://modrinth.com/mod/noisium/version/2.2.2+mc1.20-1.20.1" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>Ferrite Core</h3><p>Optymalizacja pamięci — mniej RAM'u zużywanego przez obiekty i dane gry.</p></div><div class="actions"><div class="icon">F</div><a class="btn btn-primary" href="https://modrinth.com/mod/ferrite-core/version/6.0.1" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>FPS Reducer</h3><p>Obniża FPS, gdy gra nie wymaga pełnej płynności (np. w menu), co oszczędza CPU/GPU.</p></div><div class="actions"><div class="icon">ƒ</div><a class="btn btn-primary" href="https://modrinth.com/mod/fps-reducer/version/1.20-2.5" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>C2ME (Concurrent Chunk Management Engine)</h3><p>Wielowątkowe generowanie i zarządzanie chunkami, przyspiesza eksplorację świata.</p></div><div class="actions"><div class="icon">C</div><a class="btn btn-primary" href="https://modrinth.com/mod/c2me-fabric/version/0.2.0+alpha.11.10+1.20.1" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>No Chat Reports</h3><p>Wyłącza wysyłanie raportów czatu (przydatne dla prywatności/kompatybilności).</p></div><div class="actions"><div class="icon">N</div><a class="btn btn-primary" href="https://modrinth.com/mod/no-chat-reports/version/Fabric-1.20.1-v2.2.2" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-        </div> <!-- /opti-grid -->
-
-        <div class="divider"></div>
-        <div class="muted">Uwaga: sprawdź zgodność wersji moda z wersją Minecrafta oraz wymagania Fabric/Quilt loadera.</div>
-      </div>
-
-      <!-- PvP Mods -->
-      <div id="pvp" class="content-block" style="display:none">
-        <div class="header-row">
-          <div>
-            <strong>Mody (PvP)</strong>
-            <div class="muted">Visualy, HUDy i usprawnienia gry PvP.</div>
-          </div>
-          <div class="muted">Wiele modów PvP wymaga Mod Menu.</div>
-        </div>
-
-        <div class="grid" id="pvp-grid">
-          <div class="card"><div class="meta"><h3>BetterHurtCam</h3><p>Kamera nie trzęsie się po otrzymaniu obrażeń — gra wydaje się płynniejsza.</p></div><div class="actions"><div class="icon">BH</div><a class="btn btn-primary" href="https://modrinth.com/mod/betterhurtcam" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>Soup API (PvP Visuals)</h3><p>Efekty PvP: china hat, jump circles, trails, target render i inne visualsy.</p></div><div class="actions"><div class="icon">S</div><a class="btn btn-primary" href="https://modrinth.com/mod/soup-api/versions" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>MoreCosmetics</h3><p>Darmowe kosmetyki — czapki, peleryny, skrzydła i GUI, otwierane pod M.</p></div><div class="actions"><div class="icon">MC</div><a class="btn btn-primary" href="https://modrinth.com/mod/morecosmeticsmod/versions" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>SpecSpoof</h3><p>Podmiana informacji o GPU/CPU/FPS w menu F3 (np. pokaż RTX 4090).</p></div><div class="actions"><div class="icon">SS</div><a class="btn btn-primary" href="https://modrinth.com/mod/specspoof" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>ChunkAnimator</h3><p>Animuje pojawianie się chunków, dodaje płynniejsze wejścia chunków przy generowaniu.</p></div><div class="actions"><div class="icon">CA</div><a class="btn btn-primary" href="https://modrinth.com/mod/chunkanimator?version=1.20.1" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>ReplayMod</h3><p>Nagrywaj i odtwarzaj sesje — świetne do review PvP i montażu.</p></div><div class="actions"><div class="icon">R</div><a class="btn btn-primary" href="https://modrinth.com/mod/replaymod/versions" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>AppleSkin</h3><p>Pokazuje dodatkowe informacje o jedzeniu (ile nasycenia/serc daje), bardzo użyteczne w PvP i survivalu.</p></div><div class="actions"><div class="icon">A</div><a class="btn btn-primary" href="https://modrinth.com/mod/appleskin/versions" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>In-Game Account Switcher</h3><p>Zmiana konta w grze bez restartu.</p></div><div class="actions"><div class="icon">IG</div><a class="btn btn-primary" href="https://modrinth.com/mod/in-game-account-switcher" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>Mod Menu</h3><p>Lista zainstalowanych modów i konfiguracja — wymagane przez wiele modów.</p></div><div class="actions"><div class="icon">MM</div><a class="btn btn-primary" href="https://modrinth.com/mod/modmenu/versions" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-        </div>
-
-        <div class="divider"></div>
-        <div class="muted">Wiele PvP-módów ma zależności (np. Fabric API, Cloth Config) — sprawdź wymagania na stronach modów.</div>
-      </div>
-
-      <!-- Texture Packi -->
-      <div id="texture" class="content-block" style="display:none">
-        <div class="header-row">
-          <div><strong>Texture Packi</strong><div class="muted">Paczki tekstur — opisy i linki.</div></div>
-          <div class="muted">512x — wymaga mocnego sprzętu.</div>
-        </div>
-
-        <div class="grid" id="tex-grid">
-          <div class="card"><div class="meta"><h3>RasplinVanillia</h3><p>Przyjemna paczka w stylu vanilla z drobnymi usprawnieniami wizualnymi.</p></div><div class="actions"><div class="icon">RV</div><a class="btn btn-primary" href="https://megawrzuta.pl/dayfihtd" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>Moonberry [512x]</h3><p>Wysokiej jakości paczka tekstur 512x — dla graczy z mocnym GPU.</p></div><div class="actions"><div class="icon">M</div><a class="btn btn-primary" href="https://megawrzuta.pl/rmpwie4b" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>Piwo Janka Totem</h3><p>Zabawna, customowa grafika totemu — nada charak­teru Twoim przenosinom do świata.</p></div><div class="actions"><div class="icon">PJ</div><a class="btn btn-primary" href="https://megawrzuta.pl/jvo94mwy" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <div class="card"><div class="meta"><h3>SoulSlayer</h3><p>Paczka PvP z mocniejszymi, kontrastowymi teksturami i czytelną paletą kolorów.</p></div><div class="actions"><div class="icon">SS</div><a class="btn btn-primary" href="https://megawrzuta.pl/kspusywf" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
-
-          <!-- new: Dramatic Skys -->
-          <div class="card"><div class="meta"><h3>Dramatic Skys (Resourcepack)</h3><p>Wysokiej jakości paczka nieba i atmosfery — świetna z shaderami dla dramatycznego nieba.</p></div><div class="actions"><div class="icon">DS</div><a class="btn btn-primary" href="https://modrinth.com/resourcepack/dramatic-skys" target="_blank" rel="noopener noreferrer">Pobierz</a></div></div>
+            <div class="card">
+                <h3>Licencja Dożywotnia</h3>
+                <div class="price">50 PLN <span>/ Lifetime</span></div>
+                <p>Zostań z nami na zawsze. Bez odnawiania subskrypcji.</p>
+                <ul class="features">
+                    <li>Pełny dostęp na zawsze</li>
+                    <li>Dostęp do wszystkich przyszłych wersji</li>
+                    <li>Najwyższy priorytet wsparcia</li>
+                    <li>Dostęp do prywatnego developera</li>
+                    <li>Nielimitowane darmowe zmiany HWID</li>
+                </ul>
+                <a href="#" class="btn btn-buy">Kup Teraz</a>
+            </div>
 
         </div>
-
-        <div class="divider"></div>
-        <div class="muted">Porada: używaj pakietów tekstur z Sodium/Iris aby uzyskać najlepszy wygląd i wydajność.</div>
-      </div>
-
-      <!-- Shadery -->
-      <div id="shadery" class="content-block" style="display:none">
-        <div class="header-row">
-          <div>
-            <strong>Shadery — wybór</strong>
-            <div class="muted">Shadery zmieniają oświetlenie, cienie i atmosferę — sprawdź kompatybilność z wersją Minecrafta i mod loaderem.</div>
-          </div>
-          <div class="muted">Testuj ustawienia grafiki i pamiętaj: shadery mogą silnie obciążać GPU.</div>
-        </div>
-
-        <div class="grid" id="shaders-grid">
-          <div class="card">
-            <div class="meta">
-              <h3>Complementary — Unbound (Dark shaders)</h3>
-              <p>Dark / moody shaders — idealne jeśli chcesz głębokiego, filmowego oświetlenia i intensywnych nocy.</p>
-              <p class="muted" style="margin-top:6px;font-size:12px">Źródło: Modrinth</p>
-            </div>
-            <div class="actions">
-              <div class="icon">CU</div>
-              <a class="btn btn-primary" href="https://modrinth.com/shader/complementary-unbound" target="_blank" rel="noopener noreferrer">Pobierz / Strona</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="meta">
-              <h3>BSL Shaders — Night variants</h3>
-              <p>BSL — bardzo popularne, ładne shadery z opcjami „night” / dark. Dobre połączenie wyglądu i wydajności.</p>
-              <p class="muted" style="margin-top:6px;font-size:12px">Źródło: Modrinth — sprawdź wersje (BSL ma wiele buildów).</p>
-            </div>
-            <div class="actions">
-              <div class="icon">BS</div>
-              <a class="btn btn-primary" href="https://modrinth.com/shader/bsl-shaders/versions" target="_blank" rel="noopener noreferrer">Pobierz / Wersje</a>
-            </div>
-          </div>
-
-          <!-- short note card -->
-          <div class="card" style="grid-column: span 2;">
-            <div class="meta">
-              <h3>Uwaga o kompatybilności</h3>
-              <p class="muted">Shadery zwykle wymagają Iris (dla Fabric) lub dedykowanych loaderów; łącz najlepiej z Sodium + Iris (lub OptiFine, jeśli wolisz). Przy instalacji sprawdź wymagania wersji Minecrafta i instrukcje autora.</p>
-            </div>
-            <div class="actions">
-              <div class="icon">!</div>
-              <a class="btn btn-ghost" href="https://modrinth.com" target="_blank" rel="noopener noreferrer">Modrinth</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-        <div class="muted">Porada: użyj Dramatic Skys + BSL/Complementary dla naprawdę epickiego nieba.</div>
-      </div>
-
-      <!-- Media -->
-      <div id="media" class="content-block" style="display:none">
-        <div class="header-row">
-          <div><strong>Media</strong><div class="muted">Linki i kontakt</div></div>
-          <div class="muted">Kliknij, aby otworzyć</div>
-        </div>
-
-        <div class="grid media-grid" id="media-grid">
-          <div class="card">
-            <div class="meta">
-              <h3>Discord</h3>
-              <p class="muted">Dołącz do serwera</p>
-              <a class="media-link" href="https://discord.gg/88fMjU9YZW" target="_blank" rel="noopener noreferrer">https://discord.gg/88fMjU9YZW</a>
-            </div>
-            <div class="actions">
-              <div class="icon">D</div>
-              <a class="btn btn-primary" href="https://discord.gg/88fMjU9YZW" target="_blank" rel="noopener noreferrer">Otwórz</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="meta">
-              <h3>Właściciel</h3>
-              <p class="muted">Strona właściciela / kontakt</p>
-              <a class="media-link" href="https://guns.lol/matiskow" target="_blank" rel="noopener noreferrer">https://guns.lol/matiskow</a>
-            </div>
-            <div class="actions">
-              <div class="icon">W</div>
-              <a class="btn btn-primary" href="https://guns.lol/matiskow" target="_blank" rel="noopener noreferrer">Otwórz</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-        <div class="muted">Pamiętaj: zawsze sprawdzaj, czy linki są aktualne.</div>
-      </div>
-
     </section>
 
-    <!-- right sidebar -->
-    <aside class="sidebar">
-      <div style="margin-bottom:10px;"><strong>Szybkie filtry</strong></div>
+    <section class="discord-cta">
+        <h3><span style="color: #5865F2;">Discord</span> Jak Zakupić?</h3>
+        <p>Zakup licencji odbywa się wyłącznie za pośrednictwem naszego serwera Discord. <br>
+        Aby dokonać zakupu, dołącz do nas, wejdź na kanał <strong>#zakup-licencji</strong>, stwórz 'Ticket' i podaj kod wybranego pakietu.</p>
+        <a href="https://discord.gg/4yz2wtXfDP" class="btn-large-discord" target="_blank">Dołącz do Discorda i Kup</a>
+    </section>
 
-      <div class="search" role="search">
-        <input id="quickSearch" placeholder="Szukaj moda/paczki/shadera..." oninput="quickFilter()" />
-        <button class="btn btn-ghost" onclick="clearSearch()">Wyczyść</button>
-      </div>
-
-      <div>
-        <span class="pill" onclick="showTab('optymalizacja')">Optymalizacja</span>
-        <span class="pill" onclick="showTab('pvp')">PvP</span>
-        <span class="pill" onclick="showTab('texture')">Texture</span>
-        <span class="pill" onclick="showTab('shadery')">Shadery</span>
-        <span class="pill" onclick="showTab('media')">Media</span>
-      </div>
-
-      <div style="margin-top:12px">
-        <div class="muted">Przydatne linki</div>
-        <div style="margin-top:8px">
-          <a class="pill" href="https://modrinth.com" target="_blank" rel="noopener noreferrer">Modrinth</a>
-          <a class="pill" href="https://fabricmc.net" target="_blank" rel="noopener noreferrer">Fabric</a>
-          <a class="pill" href="https://irisshaders.net" target="_blank" rel="noopener noreferrer">Iris / Shaders</a>
+    <footer>
+        <div>© Metis Client - All rights reserved</div>
+        <div class="footer-links">
+            <a href="#">regulamin</a>
+            <a href="#">prywatność</a>
         </div>
-      </div>
+        <div>✨ made with passion</div>
+    </footer>
 
-      <div style="margin-top:12px" class="muted">© 2025 Texture Packi i Mody</div>
-    </aside>
-  </div>
-
-  <footer><small class="muted">Sprawdź wersje moda przed instalacją i wymagane biblioteki (Fabric API, Cloth Config itp.).</small></footer>
-</div>
-
-<script>
-  // Tab switching
-  const tabButtons = document.querySelectorAll('.tab-btn');
-  const contentBlocks = document.querySelectorAll('.content-block');
-
-  tabButtons.forEach(btn=>{
-    btn.addEventListener('click', () => {
-      tabButtons.forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      const tab = btn.dataset.tab;
-      showTab(tab);
-    });
-  });
-
-  function showTab(tabId){
-    contentBlocks.forEach(cb=>{
-      if(cb.id === tabId) cb.style.display = 'block';
-      else cb.style.display = 'none';
-    });
-    // update active state on header buttons (in case invoked by pills)
-    tabButtons.forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
-    // hide highlight when switching tabs
-    hideHighlight();
-    // reset search
-    // document.getElementById('quickSearch').value = '';
-  }
-
-  // Quick filter across visible lists with animated show/hide + highlight 'island'
-  const highlight = document.getElementById('highlightBox');
-  function quickFilter(){
-    const q = document.getElementById('quickSearch').value.trim().toLowerCase();
-    const visibleBlock = Array.from(contentBlocks).find(cb => cb.style.display !== 'none');
-    if(!visibleBlock) return;
-    const cards = visibleBlock.querySelectorAll('.card');
-    let firstVisible = null;
-    let results = 0;
-    cards.forEach(c=>{
-      const text = c.innerText.toLowerCase();
-      if(!q || text.includes(q)){
-        c.classList.remove('hide');
-        c.style.visibility = '';
-        results++;
-        if(!firstVisible) firstVisible = c;
-      } else {
-        c.classList.add('hide');
-        c.style.visibility = 'hidden';
-      }
-    });
-
-    // small feedback (aria-live)
-    const resultMsg = document.getElementById('resultsCount');
-    if(resultMsg) resultMsg.innerText = q ? `${results} wyników` : '';
-
-    if(firstVisible){
-      showHighlightOver(firstVisible);
-    } else {
-      hideHighlight();
-    }
-  }
-
-  function clearSearch(){
-    document.getElementById('quickSearch').value='';
-    quickFilter();
-  }
-
-  function showHighlightOver(card){
-    const panel = document.getElementById('panel-area');
-    const panelRect = panel.getBoundingClientRect();
-    const rect = card.getBoundingClientRect();
-
-    // compute relative pos to panel
-    const top = rect.top - panelRect.top + panel.scrollTop - 8; // small offset
-    const left = rect.left - panelRect.left - 8;
-    const width = rect.width + 16;
-    const height = rect.height + 16;
-
-    // clamp to panel
-    const maxW = panel.clientWidth - 16;
-    const maxH = panel.clientHeight - 16;
-
-    highlight.style.width = Math.min(width, maxW) + 'px';
-    highlight.style.height = Math.min(height, maxH) + 'px';
-    highlight.style.left = Math.max(left, 8) + 'px';
-    highlight.style.top = Math.max(top, 8) + 'px';
-    highlight.classList.add('show');
-  }
-
-  function hideHighlight(){
-    highlight.classList.remove('show');
-  }
-
-  // reposition highlight on resize/scroll to keep it over the element
-  window.addEventListener('resize', () => {
-    const visibleBlock = Array.from(contentBlocks).find(cb => cb.style.display !== 'none');
-    if(!visibleBlock) return;
-    const current = visibleBlock.querySelector('.card:not(.hide)');
-    if(current) showHighlightOver(current);
-  });
-
-  // if panel scrolls (on small screens), reposition
-  document.getElementById('panel-area').addEventListener('scroll', () => {
-    const visibleBlock = Array.from(contentBlocks).find(cb => cb.style.display !== 'none');
-    if(!visibleBlock) return;
-    const current = visibleBlock.querySelector('.card:not(.hide)');
-    if(current) showHighlightOver(current);
-  });
-
-  // create small resultsCount element if not present (for accessibility feedback)
-  (function ensureResultsCount(){
-    if(!document.getElementById('resultsCount')){
-      const el = document.createElement('div');
-      el.id = 'resultsCount';
-      el.className = 'muted';
-      el.style.marginTop = '8px';
-      const opt = document.getElementById('optymalizacja');
-      if(opt) opt.appendChild(el);
-    }
-  })();
-
-  // Initialize default tab
-  showTab('optymalizacja');
-</script>
-<!-- W zakładce Media dodaj element do wyświetlania licznika -->
-<div id="mediaCounter" style="margin-top:12px; font-size:13px; color:var(--muted)">
-  Liczba unikalnych wizyt na stronie: <span id="mediaVisits">0</span>
-</div>
-
-<script>
-  // Klucz dla localStorage
-  const mediaKey = 'mc_hub_media_visits';
-  const mediaEl = document.getElementById('mediaVisits');
-
-  // Pobierz liczbę z localStorage
-  let mediaCount = parseInt(localStorage.getItem(mediaKey) || '0', 10);
-  mediaCount = isNaN(mediaCount) ? 0 : mediaCount;
-
-  // Sprawdź, czy użytkownik już odwiedził w tej sesji
-  if(!sessionStorage.getItem('mediaVisited')) {
-    mediaCount++;
-    localStorage.setItem(mediaKey, mediaCount);
-    sessionStorage.setItem('mediaVisited', 'true');
-  }
-
-  // Wyświetl aktualną liczbę
-  if(mediaEl) mediaEl.textContent = mediaCount;
-</script>
 </body>
 </html>
