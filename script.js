@@ -1,26 +1,9 @@
 /* ==========================================================================
-   Metis Community - Simple Discord Bot Pricing Script (No Descriptions)
+   Metis Community - Paired Discord Bot Pricing Script
    ========================================================================== */
 
 const PRICING_ITEMS = [
-    {
-        category: 'tickets',
-        title: 'Tickety Normalne',
-        price: 3,
-        badge: 'NORMAL',
-        badgeClass: 'badge-normal',
-        isPro: false,
-        icon: 'fa-ticket'
-    },
-    {
-        category: 'tickets',
-        title: 'Tickety PRO',
-        price: 5,
-        badge: 'PRO',
-        badgeClass: 'badge-pro',
-        isPro: true,
-        icon: 'fa-ticket-simple'
-    },
+    // Powitania (2zł -> 4zł)
     {
         category: 'welcome',
         title: 'Powitania Normalne',
@@ -28,7 +11,7 @@ const PRICING_ITEMS = [
         badge: 'NORMAL',
         badgeClass: 'badge-normal',
         isPro: false,
-        icon: 'fa-hand-wave'
+        icon: 'fa-hand-peace'
     },
     {
         category: 'welcome',
@@ -39,6 +22,7 @@ const PRICING_ITEMS = [
         isPro: true,
         icon: 'fa-image'
     },
+    // Boost Info (2zł -> 4zł)
     {
         category: 'welcome',
         title: 'Boost Info Normalne',
@@ -57,33 +41,45 @@ const PRICING_ITEMS = [
         isPro: true,
         icon: 'fa-gem'
     },
+    // Tickety (3zł -> 5zł)
     {
-        category: 'welcome',
-        title: 'Stickymessages',
-        priceText: 'GRATIS (od 10 zł)',
-        badge: 'BONUS',
-        badgeClass: 'badge-gratis',
-        isPro: false,
-        icon: 'fa-note-sticky'
-    },
-    {
-        category: 'economy',
-        title: 'Podstawowa Ekonomia',
-        price: 9,
-        badge: 'WALUTA',
+        category: 'tickets',
+        title: 'Tickety Normalne',
+        price: 3,
+        badge: 'NORMAL',
         badgeClass: 'badge-normal',
         isPro: false,
-        icon: 'fa-wallet'
+        icon: 'fa-ticket'
     },
     {
-        category: 'economy',
-        title: 'Gry Ekonomiczne PRO',
-        price: 15,
-        badge: 'METIS SET',
+        category: 'tickets',
+        title: 'Tickety PRO',
+        price: 5,
+        badge: 'PRO',
         badgeClass: 'badge-pro',
         isPro: true,
-        icon: 'fa-dice'
+        icon: 'fa-ticket-simple'
     },
+    // Giveaway (3zł -> 4zł)
+    {
+        category: 'giveaway',
+        title: 'Giveaway Normalne',
+        price: 3,
+        badge: 'NORMAL',
+        badgeClass: 'badge-normal',
+        isPro: false,
+        icon: 'fa-gift'
+    },
+    {
+        category: 'giveaway',
+        title: 'Giveaway PRO',
+        price: 4,
+        badge: 'PRO',
+        badgeClass: 'badge-pro',
+        isPro: true,
+        icon: 'fa-wand-magic-sparkles'
+    },
+    // Weryfikacja (2zł -> 3zł -> 5zł)
     {
         category: 'security',
         title: 'Weryfikacja Przycisk',
@@ -111,6 +107,7 @@ const PRICING_ITEMS = [
         isPro: true,
         icon: 'fa-shield-cat'
     },
+    // System Ochronny (8zł)
     {
         category: 'security',
         title: 'System Ochronny Full Zestaw',
@@ -120,23 +117,34 @@ const PRICING_ITEMS = [
         isPro: true,
         icon: 'fa-shield-halved'
     },
+    // Ekonomia & Gry (9zł -> 15zł)
     {
-        category: 'giveaway',
-        title: 'Giveaway Normalne',
-        price: 3,
-        badge: 'NORMAL',
+        category: 'economy',
+        title: 'Podstawowa Ekonomia',
+        price: 9,
+        badge: 'WALUTA',
         badgeClass: 'badge-normal',
         isPro: false,
-        icon: 'fa-gift'
+        icon: 'fa-wallet'
     },
     {
-        category: 'giveaway',
-        title: 'Giveaway PRO',
-        price: 4,
-        badge: 'PRO',
+        category: 'economy',
+        title: 'Gry Ekonomiczne PRO',
+        price: 15,
+        badge: 'METIS SET',
         badgeClass: 'badge-pro',
         isPro: true,
-        icon: 'fa-wand-magic-sparkles'
+        icon: 'fa-dice'
+    },
+    // Priorytet & Strona WWW
+    {
+        category: 'other',
+        title: 'Priorytet Realizacji',
+        price: 2,
+        badge: 'EXPRESS',
+        badgeClass: 'badge-hot',
+        isPro: false,
+        icon: 'fa-bolt-lightning'
     },
     {
         category: 'other',
@@ -147,14 +155,15 @@ const PRICING_ITEMS = [
         isPro: true,
         icon: 'fa-globe'
     },
+    // Stickymessages
     {
-        category: 'other',
-        title: 'Priorytet Realizacji',
-        price: 2,
-        badge: 'EXPRESS',
-        badgeClass: 'badge-hot',
+        category: 'welcome',
+        title: 'Stickymessages',
+        priceText: 'GRATIS (od 10 zł)',
+        badge: 'BONUS',
+        badgeClass: 'badge-gratis',
         isPro: false,
-        icon: 'fa-bolt-lightning'
+        icon: 'fa-note-sticky'
     }
 ];
 
@@ -171,21 +180,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         items.forEach(item => {
             const card = document.createElement('div');
-            card.className = `pricing-item ${item.isPro ? 'pro-item' : ''}`;
+            card.className = `pricing-card ${item.isPro ? 'pro-card' : ''}`;
 
             const priceHtml = item.priceText 
-                ? `<div class="item-price-custom">${item.priceText}</div>`
-                : `<div class="item-price">${item.price.toFixed(2)} <span>zł</span></div>`;
+                ? `<div class="price-pill text-green">${item.priceText}</div>`
+                : `<div class="price-pill">${item.price.toFixed(2)} <span class="currency">zł</span></div>`;
 
             card.innerHTML = `
-                <div class="item-head">
-                    <div class="item-icon-title">
+                <div class="card-left">
+                    <div class="card-icon">
                         <i class="fa-solid ${item.icon}"></i>
-                        <h3 class="item-title">${item.title}</h3>
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">${item.title}</h3>
                     </div>
                     <span class="badge ${item.badgeClass}">${item.badge}</span>
                 </div>
-                <div class="item-foot">
+                <div class="card-right">
                     ${priceHtml}
                 </div>
             `;
