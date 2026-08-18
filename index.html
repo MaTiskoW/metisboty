@@ -3,227 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cennik Botów Discord & Usług - Metis Community</title>
-    <meta name="description" content="Oficjalny cennik botów Discord, systemów ekonomii, weryfikacji, gier i stron WWW od Metis Community. Wybierz pakiety i skontaktuj się z nami na Discordzie!">
+    <title>Cennik Botów Discord - Metis Community</title>
+    <meta name="description" content="Prosty i przejrzysty cennik botów Discord od Metis Community. Sprawdź pakiety i ceny modułów.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome CDN for modern icons -->
+    <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Custom Stylesheet -->
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Background Decor Elements -->
-    <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
-    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
 
-    <!-- Navigation Header -->
-    <header class="navbar">
-        <div class="container navbar-container">
-            <a href="#" class="brand">
-                <div class="brand-logo">
+    <div class="main-wrapper">
+        <!-- Header -->
+        <header class="header">
+            <div class="brand">
+                <div class="brand-icon">
                     <i class="fa-solid fa-robot"></i>
                 </div>
-                <div class="brand-text">
-                    <span class="brand-title">METIS <span class="highlight">BOTS</span></span>
-                    <span class="brand-tag">COMMUNITY EDITION</span>
+                <div>
+                    <h1 class="brand-name">METIS <span>BOTS</span></h1>
+                    <p class="brand-subtitle">Cennik Botów & Modułów Discord</p>
                 </div>
+            </div>
+            <a href="https://discord.gg/" target="_blank" class="discord-btn">
+                <i class="fa-brands fa-discord"></i> Discord
             </a>
+        </header>
 
-            <nav class="nav-links">
-                <a href="#cennik" class="nav-link active"><i class="fa-solid fa-list-check"></i> Cennik</a>
-                <a href="#polecenia" class="nav-link"><i class="fa-solid fa-gift"></i> Program Poleceń (-10%)</a>
-                <a href="#faq" class="nav-link"><i class="fa-solid fa-circle-question"></i> FAQ</a>
-            </nav>
+        <!-- Category Filter Tabs -->
+        <nav class="filters">
+            <button class="filter-tab active" data-category="all">Wszystkie</button>
+            <button class="filter-tab" data-category="tickets">Tickety</button>
+            <button class="filter-tab" data-category="welcome">Powitania & Boost</button>
+            <button class="filter-tab" data-category="economy">Ekonomia & Gry</button>
+            <button class="filter-tab" data-category="security">Weryfikacja & Ochrona</button>
+            <button class="filter-tab" data-category="giveaway">Giveaway</button>
+            <button class="filter-tab" data-category="other">Inne</button>
+        </nav>
 
-            <div class="nav-actions">
-                <a href="https://discord.gg/" target="_blank" class="btn btn-discord btn-sm">
-                    <i class="fa-brands fa-discord"></i>
-                    <span>Złóż Zamówienie</span>
-                </a>
-            </div>
+        <!-- Pricing Grid -->
+        <main class="pricing-container" id="pricing-container">
+            <!-- Dynamic Compact Pricing Cards -->
+        </main>
+
+        <!-- Bonus Info Banner -->
+        <div class="simple-banner">
+            <i class="fa-solid fa-gift"></i>
+            <span><strong>Stickymessages GRATIS</strong> do każdego zamówienia od 10 zł!</span>
         </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container hero-container">
-            <div class="hero-badge">
-                <i class="fa-solid fa-bolt text-yellow"></i> Oficjalny Cennik Modułów & Usług
-            </div>
-            <h1 class="hero-title">
-                Cennik Botów <span class="gradient-text">Metis Community</span>
-            </h1>
-            <p class="hero-description">
-                Przejrzysta lista wszystkich dostępnych funkcji dla Twojego serwera Discord. Wybierz odpowiednie pakiety i utwórz ticket na naszym Discordzie!
-            </p>
-
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-value">100%</span>
-                    <span class="stat-label">Jakości Metis</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-value">24/7</span>
-                    <span class="stat-label">Uptime & Działanie</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-value">-10%</span>
-                    <span class="stat-label">Z Kodem Polecającym</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Bonus Banner -->
-    <div class="bonus-banner-section container">
-        <div class="bonus-banner">
-            <div class="bonus-icon">
-                <i class="fa-solid fa-note-sticky"></i>
-            </div>
-            <div class="bonus-content">
-                <h3><span class="badge-free">BONUS BEZPŁATNY</span> Stickymessages za GRATIS!</h3>
-                <p>Wszystkie zamówienia o łącznej wartości od <strong>10 PLN</strong> otrzymują moduł <strong>Stickymessages</strong> zupełnie za darmo!</p>
-            </div>
-        </div>
+        <!-- Minimal Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 Metis Community &bull; Zamówienia przyjmowane na serwerze Discord</p>
+        </footer>
     </div>
 
-    <!-- Main Pricing Catalog -->
-    <section class="pricing-section container" id="cennik">
-        <div class="section-header">
-            <div class="section-subtitle">Pakiety & Wycena</div>
-            <h2 class="section-title">Katalog Usług i Modułów</h2>
-            
-            <!-- Category Filters -->
-            <div class="category-filters">
-                <button class="filter-btn active" data-category="all"><i class="fa-solid fa-border-all"></i> Wszystkie</button>
-                <button class="filter-btn" data-category="tickets"><i class="fa-solid fa-ticket"></i> Tickety</button>
-                <button class="filter-btn" data-category="welcome"><i class="fa-solid fa-hand-wave"></i> Powitania & Boost</button>
-                <button class="filter-btn" data-category="economy"><i class="fa-solid fa-coins"></i> Ekonomia & Gry</button>
-                <button class="filter-btn" data-category="security"><i class="fa-solid fa-shield-halved"></i> Weryfikacja & Ochrona</button>
-                <button class="filter-btn" data-category="giveaway"><i class="fa-solid fa-gift"></i> Giveaways</button>
-                <button class="filter-btn" data-category="other"><i class="fa-solid fa-globe"></i> WWW & Priorytet</button>
-            </div>
-        </div>
-
-        <div class="pricing-grid" id="pricing-grid">
-            <!-- Compact Cards Rendered via JS -->
-        </div>
-    </section>
-
-    <!-- Program Poleceń & Kody Section -->
-    <section class="referral-section container" id="polecenia">
-        <div class="referral-card">
-            <div class="referral-badge">
-                <i class="fa-solid fa-coins"></i> PROGRAM POLECEŃ & KODY RABATOWE
-            </div>
-            <h2 class="referral-title">Polecaj i Zyskuj z Kodem Polecającym</h2>
-            <p class="referral-desc">
-                Promuj nasze usługi znajomym! Kod polecający zapewnia zysk dla obu stron transakcji.
-            </p>
-
-            <div class="referral-grid">
-                <div class="referral-box">
-                    <div class="box-icon">
-                        <i class="fa-solid fa-percent"></i>
-                    </div>
-                    <div class="box-badge">-10% DLA ZNAJOMEGO</div>
-                    <h3>Dla Kupującego</h3>
-                    <p>Osoba korzystająca z Twojego kodu rabatowego podczas zamówienia otrzymuje **10% zniżki** na całą kwotę zamówienia.</p>
-                </div>
-
-                <div class="referral-box">
-                    <div class="box-icon">
-                        <i class="fa-solid fa-wallet"></i>
-                    </div>
-                    <div class="box-badge">10% DLA PROMOTORA</div>
-                    <h3>Dla Polecającego</h3>
-                    <p>Za każde zamówienie z Twoim kodem otrzymujesz **10% wartości zamówienia** na własne zakupy lub do wypłaty!</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-section container" id="faq">
-        <div class="section-header">
-            <div class="section-subtitle">Informacje</div>
-            <h2 class="section-title">Najczęściej Zadawane Pytania</h2>
-        </div>
-
-        <div class="faq-accordion">
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Jak zamówić wy wybrane moduły?</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>Dołącz do naszego serwera Discord, przejdź do kanału zamówień i otwórz ticket. Podaj listę interesujących Cię modułów z cennika oraz ewentualny kod rabatowy od znajomego!</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Jak działa bonus "Stickymessages GRATIS"?</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>Każde zamówienie o wartości wynoszącej minimum 10 PLN automatycznie kwalifikuje się do bezpłatnego dodania modułu Stickymessages do Twojego bota.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Czym różnią się moduły "Normalne" od "PRO"?</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>Wersje **PRO** posiadają pełne wsparcie dla rozbudowanych menu rozwijanych, automatycznych grafik HD (z supersamplingiem 2x), transkryptów HTML oraz zaawansowanych systemów zabezpieczeń i anty-botów.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <button class="faq-question">
-                    <span>Jak działa opcja "Strona internetowa serwera (20 zł) + Domena"?</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </button>
-                <div class="faq-answer">
-                    <p>Otrzymujesz nowocześnie wyglądającą stronę WWW dla swojego serwera Discord (wersja beta). Jeśli wybrana domena internetowa jest dostępna w taniej cenie promocyjnej, rejestrujemy ją gratis w 95% przypadków!</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container footer-container">
-            <div class="footer-left">
-                <div class="brand">
-                    <div class="brand-logo">
-                        <i class="fa-solid fa-robot"></i>
-                    </div>
-                    <div class="brand-text">
-                        <span class="brand-title">METIS <span class="highlight">BOTS</span></span>
-                    </div>
-                </div>
-                <p>Oficjalny cennik botów Discord dla Metis Community.</p>
-            </div>
-            
-            <div class="footer-right">
-                <p>&copy; 2026 Metis Community. Wszelkie prawa zastrzeżone.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
     <script src="script.js"></script>
 </body>
 </html>
